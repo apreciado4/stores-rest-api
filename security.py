@@ -1,6 +1,7 @@
 import hmac
 from models.user import UserModel
 
+
 def authenticate(username, password):
     """
     Function that gets called when a user calls the /auth endmpoint
@@ -14,6 +15,7 @@ def authenticate(username, password):
     if user and hmac.compare_digest(user.password, password):
         return user
 
+
 def identity(payload):
     """
     Function that gets called when user has already authenticated, and Flask-JWT
@@ -23,4 +25,3 @@ def identity(payload):
     """
     user_id = payload['identity']
     return UserModel.find_by_id(user_id)
-
