@@ -21,7 +21,8 @@ class BaseTest(TestCase):
         app.config["PROPAGATE_EXCEPTIONS"] = True
 
         with app.app_context():
-            db.init_app(app)
+            if "sqlalchemy" not in app.extensions:
+                db.init_app(app)
 
     def setUp(self):
         # Make sure database exists
